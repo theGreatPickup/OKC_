@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片轮播插件(js原生)</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <div class="sliderContainer">
+        <!-- 1.图片部分 -->
+        <div class="imgContainer">
+            <img src="img/banner1.png" alt="" class="show">
+            <img src="img/banner2.png" alt="">
+            <img src="img/banner3.png" alt="">
+            <img src="img/banner4.png" alt="">
+        </div>
+        <!-- 2.左右侧按钮 -->
+        <div class="btn">
+            <img src="img/left.png" alt="" class="left">
+            <img src="img/right.png" alt="" class="right">
+        </div>
+        <!-- 3.底部导航圆 -->
+        <ul class="dots">
+            <li class="dot show" data-id="0"></li>
+            <li class="dot" data-id="1"></li>
+            <li class="dot" data-id="2"></li>
+            <li class="dot" data-id="3"></li>
+        </ul>
+    </div>
+    <script>
+        window.onload=function(){
+            // 0.初始化状态
+            var i=0,timer=null;
+            // 1.获取轮播图区域、图片列表、按钮列表、导航圆点列表
+            var box=document.getElementsByClassName("sliderContainer")[0];
+            var imgs=document.querySelectorAll("div.sliderContainer div.imgContainer img");
+            var len=imgs.length;
+            var btns=document.querySelectorAll("div.sliderContainer div.btn img");
+            var dots=document.getElementsByClassName("dots")[0];
+            var dot=document.getElementsByClassName("dot");
+            // 2.添加定时器事件，规定每2s滚动一次
+            timer=setInterval(function(){
+                if(i<len-1){
+                    i++;
+                }else{
+                    i=0;
+                }
+                sliderChange(i);
+            },2000)
+            // 3.鼠标移入轮播图范围时，清除定时器，移除时，继续启用定时器
+            box.onmouseenter=function(){
+                clearInterval(timer);
+            }
+            box.onmouseleave=function(){
+                clearInterval(timer);
+                timer=setInterval(function(){
+                    if(i<len-1){
+                        i++;
+                    }else{
+                        i=0;
+                    }
+                    sliderChange(i);
+                },2000)
+            }
+            // 4.设置按钮特效
+            btns[0].onclick=function(){
+                if(i>0){
+                    i--;
+                }else{
+                    i=len-1;
+                }
+                sliderChange(i);
+            }
+            btns[1].onclick=function(){
+                if(i<len-1){
+                    i++;
+                }else{
+                    i=0;
+                }
+                sliderChange(i);
+            }
+            // 5.设置导航圆点特效
+            dots.onclick=function(e){
+                if(e.target.tagName==="LI"){
+                    i=e.target.dataset.id;
+                    sliderChange(i);
+                } 
+            }
+            // 设置变化的核心函数 
+            function sliderChange(i){
+                console.log(i);
+                for(var j=0;j<len;j++){
+                    imgs[j].className="";
+                    dot[j].className="dot"
+                }
+                imgs[i].className="show";
+                dot[i].className="dot show";
+            }
+        }
+    </script>
+</body>
+</html>

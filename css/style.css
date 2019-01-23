@@ -1,0 +1,66 @@
+/* 0.轮播图盒子样式 */
+div.sliderContainer{
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+    position: relative;
+}
+/* 1.图片部分样式 */
+div.sliderContainer div.imgContainer,
+div.sliderContainer div.imgContainer img{
+    width: 100%;
+}
+div.sliderContainer div.imgContainer img{
+    display: none;
+}
+div.sliderContainer div.imgContainer img.show{
+    display: block;
+}
+/* 2.左右按钮样式 */
+div.sliderContainer div.btn img.left,
+div.sliderContainer div.btn img.right{
+    position: absolute;
+    display: block;
+    opacity: 0.2;
+    width: 40px;
+    height: 50px;
+    padding: 10px 5px;
+    top: 165px;
+    left: 20px;
+}
+div.sliderContainer div.btn img.right{
+    left: auto;
+    right: 20px;
+}
+div.sliderContainer div.btn img:hover{
+    opacity: 0.6;
+    background: #ccc;
+    cursor: pointer;
+}
+/* 3.导航圆点样式 */
+div.sliderContainer ul.dots{
+    position: absolute;
+    padding: 0px;
+    left: 50%;
+    margin-left: -50px;
+    width: 100px;
+    height: 12px;
+    bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+div.sliderContainer ul.dots li{
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    opacity: 0.4;
+}
+div.sliderContainer ul.dots li.show{
+    background: rgba(0,0,0,0.3);
+    border: 2px solid white;
+}
